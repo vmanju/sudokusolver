@@ -127,7 +127,7 @@ public class SudokuSolver {
 		try {
 			BufferedWriter fileWriter = new BufferedWriter(new FileWriter(filename));
 			for(int row = 0; row < grid.length; row++){
-				StringBuffer sb = new StringBuffer();
+				StringBuilder sb = new StringBuilder();
 				for(int col = 0; col<grid.length; col++){
 					sb.append(grid[row][col]).append(",");
 				}
