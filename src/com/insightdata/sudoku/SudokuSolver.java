@@ -1,8 +1,10 @@
 package com.insightdata.sudoku;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -83,7 +85,7 @@ public class SudokuSolver {
 	 * @param filename input csv file path
 	 * @return
 	 */
-	private static int[][] parseGrid(String filename){
+	private static int[][] parseInputFile(String filename){
 	
 		BufferedReader fileReader = null;
         final String DELIMITER = ",";
@@ -106,10 +108,10 @@ public class SudokuSolver {
             fileReader.close();
 			
 		} catch (FileNotFoundException e) {
-			System.out.println("File not found exception: " + filename);
+			System.out.println("Input csv File not found exception: " + filename);
 			e.printStackTrace();
 		} catch (IOException e) {
-			System.out.println("IO exception with file: " + filename);
+			System.out.println("IO exception with input csv file: " + filename);
 			e.printStackTrace();
 		}
 		return grid;
@@ -121,15 +123,28 @@ public class SudokuSolver {
 	 * @param filename output csv file path
 	 * @return
 	 */
-	/*private static int[][] writeGridToOutput(int[][] grid, String filename){
-		
-	}*/
+	private static void writeGridToOutput(int[][] grid, String filename){
+		try {
+			BufferedWriter fileWriter = new BufferedWriter(new FileWriter(filename));
+			for(int row = 0; row < grid.length; row++){
+				StringBuffer sb = new StringBuffer();
+				for(int col = 0; col<grid.length; col++){
+					sb.append(grid[row][col]).append(",");
+				}
+				fileWriter.write(sb.toString() + "\n");
+			}
+			fileWriter.close();
+		} catch (IOException e) {
+			System.out.println("IO exception with output csv file: " + filename);
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public static void main(String[] args) {
-		int[][] inputGrid = parseGrid(args[0]);
+		int[][] inputGrid = parseInputFile(args[0]);
 		int[][] outputGrid = solveSudoku(inputGrid);
-		//writeGridToOutput(outputGrid, args[1]);
+		writeGridToOutput(outputGrid, args[1]);
 	}
 
 }
