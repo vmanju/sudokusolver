@@ -30,3 +30,6 @@ SudokuValidator.java
 
 SudokuUtility.java
 
+Reference:
+==========
+Peter Norvig's Sudoku page: http://norvig.com/sudoku.html
