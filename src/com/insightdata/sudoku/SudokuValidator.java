@@ -8,7 +8,8 @@ package com.insightdata.sudoku;
 public class SudokuValidator {
 	
 	/**
-	 * Check if a partially filled Sudoku board has any conflicts
+	 * Check if the initial configuration (a partially filled Sudoku board)
+	 * has any conflicts
 	 * @param grid Sudoku board
 	 * @return
 	 */
